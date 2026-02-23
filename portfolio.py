@@ -19,7 +19,6 @@ st.markdown(
     }}
     .giraffe-container img {{
         width: 100px;  /* 調整長頸鹿的大小 */
-        filter: drop-shadow(2px 4px 6px black); /* 增加一點陰影，看起來更立體 */
     }}
     </style>
     <div class="giraffe-container">
