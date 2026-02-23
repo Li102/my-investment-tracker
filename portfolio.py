@@ -4,7 +4,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Python 投資小工具", layout="wide")
 
-st.title("📈 投資組合分析A")
+st.title("📈 投資組合分析")
 
 # ====== 1. 介面輸入區：讓使用者自行定義組合 ======
 st.sidebar.header("📥 你的投資組合")
