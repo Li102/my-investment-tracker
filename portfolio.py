@@ -1,8 +1,10 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
-
 import streamlit as st
+
+# Step1：設定頁面配置
+st.set_page_config(page_title="Python 投資小工具", layout="wide")
 
 # 1. 定義長頸鹿圖片的網址 (你可以換成任何你喜歡的 GIF 或 PNG)
 giraffe_url = "https://raw.githubusercontent.com/Li102/my-investment-tracker/refs/heads/main/giraffe.png"
@@ -27,8 +29,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-st.set_page_config(page_title="Python 投資小工具", layout="wide")
 
 st.title("📈 投資組合分析")
 
