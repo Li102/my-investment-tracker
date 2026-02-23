@@ -11,7 +11,7 @@ st.sidebar.header("📥 你的投資組合")
 
 # 預設資料 (DataFrame 格式，方便介面編輯)
 init_data = [
-    {"Ticker": "0050.TW", "Shares": 100, "Cost": 50, "Target": 0.40},
+    {"Ticker": "0050", "Shares": 100, "Cost": 50, "Target": 0.40},
     {"Ticker": "BNDW", "Shares": 50, "Cost": 100.0, "Target": 0.15},
     {"Ticker": "VT", "Shares": 100, "Cost": 150.0, "Target": 0.45}
 ]
