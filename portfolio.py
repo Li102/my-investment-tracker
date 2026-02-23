@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 # 1. 定義長頸鹿圖片的網址 (你可以換成任何你喜歡的 GIF 或 PNG)
-giraffe_url = "https://chatgpt.com/s/m_699bf131d7ac81919a44c7b8b130aa30"
+giraffe_url = "https://raw.githubusercontent.com/Li102/my-investment-tracker/refs/heads/main/giraffe.png"
 
 # 2. 使用 CSS 把它固定在右下角
 st.markdown(
