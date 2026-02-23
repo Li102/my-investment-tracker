@@ -71,6 +71,47 @@ if st.sidebar.button("🚀 開始計算"):
         df['Weight'] = df['Market_Value'] / total_val
         df['Return_%'] = (df['Price_TWD'] - df['Cost_TWD']) / df['Cost_TWD'] * 100
 
+        # ====== 智能投顧邏輯：再平衡行動指令 ======
+    st.divider()
+    st.subheader("🤖 智能再平衡行動指令 (Smart Action Plan)")
+
+    # 1. 輸入下個月預計投入金額
+    monthly_budget = st.number_input("下個月預計投入金額 (TWD)", min_value=0, value=24000, step=1000)
+
+    if st.button("📊 生成投資建議"):
+        # 計算投入後的理想總市值
+        new_total_val = total_val + monthly_budget
+        
+        # 計算各標的「理想市值」與「現有市值」的差距
+        actions = []
+        for idx, row in df.iterrows():
+            ideal_val = new_total_val * row['Target']
+            gap = ideal_val - row['Market_Value']
+            # gap > 0 代表需要補倉
+            actions.append({"Ticker": idx, "Gap": max(0, gap)})
+    
+    # 2. 比例分配邏輯 (把 24,000 按缺口比例分配)
+    total_gap = sum(item["Gap"] for item in actions)
+    
+    if total_gap > 0:
+        st.info(f"依據您的目標比例 40:45:15，這 ${monthly_budget:,.0f} 建議分配如下：")
+        
+        # 建立建議表格
+        advice_list = []
+        for item in actions:
+            # 按缺口比例分配預算
+            allocation = (item["Gap"] / total_gap) * monthly_budget
+            advice_list.append({
+                "標的": item["Ticker"],
+                "建議投入金額 (TWD)": round(allocation, 0),
+                "分配比例": f"{(allocation/monthly_budget)*100:.1f}%"
+            })
+        
+        st.table(pd.DataFrame(advice_list))
+        st.success("💡 優先補足「目前權重偏低」的標的，無需賣出即可達成再平衡！")
+    else:
+        st.write("目前組合非常平衡，建議按原比例分配即可。")
+
         # ====== 3. 視覺化呈現 ======
         # 顯示重點指標 (Metric)
         m1, m2 = st.columns(2)
