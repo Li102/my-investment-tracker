@@ -2,12 +2,12 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 
-st.set_page_config(page_title="Python 投資接案工具", layout="wide")
+st.set_page_config(page_title="Python 投資小工具", layout="wide")
 
-st.title("📈 投資組合即時監控介面")
+st.title("📈 投資組合分析")
 
 # ====== 1. 介面輸入區：讓使用者自行定義組合 ======
-st.sidebar.header("📥 配置你的投資組合")
+st.sidebar.header("📥 你的投資組合")
 
 # 預設資料 (DataFrame 格式，方便介面編輯)
 init_data = [
