@@ -2,6 +2,33 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 
+import streamlit as st
+
+# 1. 定義長頸鹿圖片的網址 (你可以換成任何你喜歡的 GIF 或 PNG)
+giraffe_url = "https://chatgpt.com/s/m_699bf131d7ac81919a44c7b8b130aa30"
+
+# 2. 使用 CSS 把它固定在右下角
+st.markdown(
+    f"""
+    <style>
+    .giraffe-container {{
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 100;
+    }}
+    .giraffe-container img {{
+        width: 100px;  /* 調整長頸鹿的大小 */
+        filter: drop-shadow(2px 4px 6px black); /* 增加一點陰影，看起來更立體 */
+    }}
+    </style>
+    <div class="giraffe-container">
+        <img src="{giraffe_url}" alt="Giraffe">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
 st.set_page_config(page_title="Python 投資小工具", layout="wide")
 
 st.title("📈 投資組合分析")
