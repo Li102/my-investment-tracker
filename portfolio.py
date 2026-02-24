@@ -99,10 +99,19 @@ if 'df' in st.session_state:
                 if alloc > 0:
                     advice_list.append({
                         "標的": item["Ticker"],
-                        "建議投入 (TWD)": round(alloc, 0),
-                        "分配比例": f"{(alloc/monthly_budget)*100:.1f}%"
+                        "建議投入 (TWD)": alloc,
+                        "分配比例": alloc/monthly_budget
                     })
-            st.table(pd.DataFrame(advice_list))
+
+            # 建立 DataFrame 並進行視覺化格式處理
+            advice_df = pd.DataFrame(advice_list)
+
+            # 使用 style.format 將金額設為整數，比例設為百分比
+            st.table(advice_df.style.format({
+                "建議投入 (TWD)": "{:,.0f}", # 加上千分位，並取 0 位小數
+                "分配比例": "{:.1%}"        # 轉為百分比顯示，保留 1 位小數
+            }))
+
             st.success("💡 優先補足權重偏低標的，達成再平衡！")
         else:
             st.write("目前組合非常平衡，建議按原比例分配。")
