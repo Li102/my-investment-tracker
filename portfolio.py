@@ -1,7 +1,6 @@
 import streamlit as st
 import yfinance as yf
 import pandas as pd
-import base64
 
 # Step1：設定頁面配置 (必須在第一行)
 st.set_page_config(page_title="Python 投資小工具", layout="wide")
@@ -66,10 +65,16 @@ if 'df' in st.session_state:
     m1.metric("總市值 (TWD)", f"${total_val:,.0f}")
     m2.metric("USD/TWD 匯率", f"{st.session_state.usdtwd:.2f}")
 
-    st.subheader("📊 詳細分析報表")
+    st.subheader("📊 分析結果")
     st.dataframe(df[['Current_Price', 'Return_%', 'Weight', 'Target']].style.format({
         'Current_Price': '{:,.2f}', 'Return_%': '{:+.2f}%', 'Weight': '{:.2%}', 'Target': '{:.2%}'
     }), use_container_width=True)
+
+    # 顯示警報
+    for idx, row in df.iterrows():
+        diff = row['Weight'] - row['Target']
+        if abs(diff) > 0.05:
+            st.warning(f"⚠️ **{idx}** 偏離目標平衡點 ({diff:+.2%})，建議調整。")
 
     # ====== 4. 智能再平衡 (獨立區塊，不嵌套) ======
     st.divider()
@@ -101,3 +106,4 @@ if 'df' in st.session_state:
             st.success("💡 優先補足權重偏低標的，達成再平衡！")
         else:
             st.write("目前組合非常平衡，建議按原比例分配。")
+
